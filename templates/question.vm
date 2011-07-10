@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>Semantic Compression Test</title>
+
+    #if($done)
+      <meta http-equiv="refresh" content="0; url=thanks"/>
+    #end
+  </head>
+  <body>
+    #if(!$done)
+    <center>
+      <div>
+        <img src="$url" style="margin: 200px auto 50px;"/>
+        <br/>
+      </div>
+      <br/>
+      <div style="width: 40%;">
+        <form action="answer">
+  	      <fieldset>
+      	    <div style="float: left; width: 50%;">
+              <label for="City Slickers" style="display: block;">City Slickers</label>
+              <input type="radio" name="choice" value="A"/>
+          	</div>
+          	<div style="float: right; width: 50%;">
+              <label for="No Country for Old Men" style="display: block;">No Country For Old Men</label>
+              <input type="radio" name="choice" value="B"/>
+          	</div>
+    		  </fieldset>
+          <fieldset>
+            <p>
+              How confident are you about your choice?
+            </p>
+            <p>
+              <em>Not confident</em>
+              <input type="radio" name="confidence" value="1"/>
+              <input type="radio" name="confidence" value="2"/>
+              <input type="radio" name="confidence" value="3"/>
+              <input type="radio" name="confidence" value="4"/>
+              <input type="radio" name="confidence" value="5"/>
+              <em>Very confident</em>
+            </p>
+          </fieldset>
+          <input type="hidden" name="qnum" value="$qnum"/>
+          <input type="submit" value="Next"/>
+        </form>
+      </div>
+      <div id="footer">
+      	<p>If you have any questions, contact Brandon Wiley at <a href="mailto:comptest@blanu.net">comptest@blanu.net</a>.</p>
+      </div>
+    </center>
+    #end
+  </body>
+</html>

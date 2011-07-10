@@ -1,0 +1,89 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      var found=false;
+      var timer=null;
+
+      function log(s)
+      {
+        if(console)
+        {
+          console.log(s);
+        }
+      }
+
+      function ping(url)
+      {
+        log('ping '+url);
+        var sess = new Date();
+        var nocache = sess.getTime();
+        var imguri = url+"?time="+nocache;
+        var imgPreload = new Image();
+        imgPreload.onload = function()
+        {
+          log('onload');
+          if(!found)
+          {
+            found=true;
+            clearTimeout(timer);
+            timer = null;
+            found=true;
+            log("Domain is available: "+imgPreload.src);
+            var parts=imgPreload.src.split('/');
+            console.log('parts: '+parts);
+            var dest='http://'+parts[2]+'/$file';
+            console.log('dest: '+dest);
+            window.location=dest;
+          }
+        };
+
+        imgPreload.src = imguri;
+
+        if(!timer)
+        {
+          log('setting timer');
+          timer = setTimeout("fail_to_ping()",10000);
+        }
+      }
+
+      function fail_to_ping()
+      {
+        log('fail');
+        clearTimeout(timer);
+        timer = null;
+
+        if(!found)
+        {
+          log("Ping to domain failed!");
+
+          requestProxy();
+        }
+      }
+
+      function requestProxy()
+      {
+        $.getJSON('/proxy/$file', proxyRedirect);
+      }
+
+      function proxyRedirect(data)
+      {
+        log('data: '+data);
+        token=data;
+        var dest='http://ringlight.us:2330/'+token;
+        console.log('dest: '+dest);
+        window.location=dest;
+      }
+
+      log('starting pings');
+
+      #foreach($host in $hosts)
+        ping("http://$host:$port/ping.gif");
+      #end
+
+      log('finished pings');
+    </script>
+  </body>
+</html>

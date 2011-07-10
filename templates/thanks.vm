@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>Semantic Compression Test</title>
+  </head>
+  <body>
+    <center>
+      <div>
+        Thank you for participating in the survey.
+      </div>
+      <div id="footer">
+      	<p>If you have any questions, contact Brandon Wiley at <a href="mailto:comptest@blanu.net">comptest@blanu.net</a>.</p>
+      </div>      
+    </center>
+  </body>
+</html>

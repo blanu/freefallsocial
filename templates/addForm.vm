@@ -1,0 +1,9 @@
+<div id="$wave.waveid" class="wave">
+  <div class="addParticipantsForm" title="Add participants" wave="$wave.waveid">
+    <ul id="contacts"></ul>
+  </div>
+  <script text="text/javascript">
+    waveid='$wave.waveid';
+  </script>
+  <script type="text/javascript" src="/static/addForm.js"></script>
+</div>

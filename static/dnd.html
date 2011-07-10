@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+	<title>How Gmail's drag and drop works and why it's not supported in Safari | The CSS Ninja</title>
+</head>
+<body>
+	<div id="drop">
+		<h1>Drop files here</h1>
+		<p>To add them as attachments</p>
+    <form enctype="multipart/form-data">
+      <input type="file" id="file" multiple="true"/>
+    </form>
+  </div>
+	<ul id="listing"></ul>
+  <ul id="attachments"></ul>
+  <hr/>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/debug.js"></script>
+  <script type="text/javascript" src="/static/gadget.js"></script>
+  <script type="text/javascript" src="/static/dnd.js"></script>
+</body>
+</html>

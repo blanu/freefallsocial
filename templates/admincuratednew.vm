@@ -1,0 +1,10 @@
+<html>
+  <head>
+    <title>Wavetabs - Like Wave Only With Tabs</title>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/style.css" rel="stylesheet" type="text/css"/>
+    <meta http-equiv="refresh" context="0; url=/admin/curated"/>
+  </head>
+  <body>
+  </body>
+</html>

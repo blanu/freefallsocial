@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Semantic Compression Test Results</title>
+  </head>
+  <body>
+    #foreach($result in $results)
+      <p>
+        $result.__getitem__(0)
+        <ul>
+          #set($entries=$result.__getitem__(1))
+          #foreach($entry in $entries)
+            #set($question=$entry.__getitem__(0))
+            #set($answer=$entry.__getitem__(1))
+            #set($correct=$entry.__getitem__(2))
+            <li>$question - $answer - $correct</li>
+          #end
+        </ul>
+      </p>
+    #end
+  </body>
+</html>

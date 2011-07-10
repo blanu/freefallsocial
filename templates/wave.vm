@@ -1,0 +1,20 @@
+<div id="$wave.waveid" class="wave">
+  <button class="renameTabButton" type="button">Rename</button>
+  <button class="deleteTabButton" type="button">Delete this tab</button>
+  <div class="participants"></div>
+  <div class="gadgets"></div>
+
+  <script type="text/javascript">
+    log('making new wave $wave.waveid');
+    var wv=new ocean.Wave('$wave.waveid');
+    log('ocean waves: '+ocean.waves);
+    log('wv:');
+    log(wv);
+    ocean.waves['$wave.waveid']=wv
+
+    #foreach($gadget in $gadgets)
+      wv.gadgetIds.push({'id': '$gadget.gadgetid', 'url': "$gadget.url"});
+    #end
+  </script>
+  <script type="text/javascript" src="/static/wave.js"></script>
+</div>

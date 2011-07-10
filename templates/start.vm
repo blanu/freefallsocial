@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Semantic Compression Test</title>
+  </head>
+  <body>
+    <center>
+      <p>Please rate your familiarity with the following films:</p>
+      <form action="continue">
+      	<h1>City Slickers</h1>
+      	<em>Not familiar</em>
+        <input type="radio" name="CitySlickers" value="1"/>
+        <input type="radio" name="CitySlickers" value="2"/>
+        <input type="radio" name="CitySlickers" value="3"/>
+        <input type="radio" name="CitySlickers" value="4"/>
+        <input type="radio" name="CitySlickers" value="5"/>
+      	<em>Very familiar</em>
+
+      	<h1>No Country For Old Men</h1>
+      	<em>Not familiar</em>
+        <input type="radio" name="nocountry" value="1"/>
+        <input type="radio" name="nocountry" value="2"/>
+        <input type="radio" name="nocountry" value="3"/>
+        <input type="radio" name="nocountry" value="4"/>
+        <input type="radio" name="nocountry" value="5"/>
+      	<em>Very familiar</em>
+        <br/>
+        <p><input type="submit" value="Next"/></p>
+      </form>
+      <div id="footer">
+      	<p>If you have any questions, contact Brandon Wiley at <a href="mailto:comptest@blanu.net">comptest@blanu.net</a>.</p>
+      </div>
+    </center>
+  </body>
+</html>

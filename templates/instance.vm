@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <title>Shared Files for $instance.name</title>
+  </head>
+  <body>
+    <ul>
+      #foreach($file in $files)
+        <li><a href="/$file.publicId">$file.name</a></li>
+      #end
+    </ul>
+  </body>
+</html>

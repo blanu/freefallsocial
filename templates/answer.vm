@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>Semantic Compression Test</title>
+
+    #if($done)
+      <meta http-equiv="refresh" content="0; url=thanks"/>
+    #else
+      <meta http-equiv="refresh" content="0; url=question"/>
+    #end
+  </head>
+  <body>
+  </body>
+</html>

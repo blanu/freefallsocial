@@ -1,0 +1,24 @@
+<html>
+  <head>
+    #if($redirect)
+      <meta http-equiv="refresh" content="0; url=$url"/>
+    #end
+  </head>
+  <body>
+    #if(!$redirect)
+    <div id="$wave.waveid" class="wave">
+      <div class="addParticipantsForm" title="Add participants" wave="$wave.waveid">
+        <ul id="contacts"></ul>
+      </div>
+      <script text="text/javascript">
+        waveid='$wave.waveid';
+      </script>
+      <script type="text/javascript" src="/static/addForm.js"></script>
+    </div>
+    #else
+    <script type="text/javascript">
+      window.location='$url';
+    </script>
+    #end
+  </body>
+</html>
