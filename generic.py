@@ -5,10 +5,17 @@ from google.appengine.ext import webapp
 from django.utils.simplejson import loads, dumps
 
 from airspeed import CachingFileLoader
+from jsonrpc.handler import JSONRPC
 
 class GenericPage(webapp.RequestHandler):
+  def options(self, *args):
+    self.response.headers['Access-Control-Allow-Origin']='*'
+    self.response.headers['Access-Control-Allow-Headers']='Content-Type'
+      
   def get(self, *args):
+    self.response.headers['Access-Control-Allow-Origin']='*'
     user = users.get_current_user()
+    logging.info('Generic user: '+str(user))
 
     if self.requireLogin() and not user:
       self.redirect(users.create_login_url(self.request.uri))
@@ -16,6 +23,7 @@ class GenericPage(webapp.RequestHandler):
       self.execute('get', user, self.request, self.response, args)
 
   def post(self, *args):
+    self.response.headers['Access-Control-Allow-Origin']='*'
     logging.debug('post! '+str(self.request.path)+' '+str(self.__class__))
     user = users.get_current_user()
     self.execute('post', user, self.request, self.response, args)
@@ -38,6 +46,7 @@ class GenericPage(webapp.RequestHandler):
 
 class TemplatePage(GenericPage):
   def execute(self, method, user, req, resp, args):
+    logging.info('Template user: '+str(user))
     loader = CachingFileLoader("templates")
     templateName=self.__class__.__name__.lower()
     if templateName[-4:]=='page':
@@ -46,7 +55,7 @@ class TemplatePage(GenericPage):
     template = loader.load_template(templateName)
     context={}
     context['user']=user
-    self.processContext(method, user, req, resp, args, context)
+    self.processContext(method.upper(), user, req, resp, args, context)
     body=template.merge(context, loader=loader)
 #    resp.headers['Content-Type']='text/html'
     resp.out.write(body)
@@ -56,30 +65,39 @@ class TemplatePage(GenericPage):
 
 class JsonPage(GenericPage):
   def execute(self, method, user, req, resp, args):
+    logging.info('JSON user: '+str(user))
+    logging.info('req.body: '+str(req.body))
     try:
       obj=loads(req.body)
     except:
       obj=None
-    output=self.processJson(method, user, req, resp, args, obj)
+    logging.info('obj: '+str(obj))
+    output=self.processJson(method.upper(), user, req, resp, args, obj)
 #    logging.debug('json output: '+str(output))
-    if output!=None:
-      s=dumps(output)
-      logging.debug('got output')
-      try:
-        resp.headers.add_header('content-type', 'application/json')
-        resp.out.write(s)
-        logging.debug('wrote output '+str(len(s)))
-      except Exception, e:
-        logging.debug('Failed to write json: '+str(e))
+    s=dumps(output)
+    logging.debug('got output')
+    try:
+      resp.headers.add_header('content-type', 'application/json')
+      resp.out.write(s)
+      logging.debug('wrote output '+str(len(s)))
+    except Exception, e:
+      logging.debug('Failed to write json: '+str(e))
 
   def processJson(self, method, user, req, resp, args, obj):
     pass
 
 class FilePage(GenericPage):
   def execute(self, method, user, req, resp, args):
-    output=self.processFile(method, user, req, resp, args, req.body)
+    output=self.processFile(method.upper(), user, req, resp, args, req.body)
     if output:
       resp.out.write(output)
 
   def processFile(self, method, user, req, resp, args, obj):
     pass
+
+class JsonRpcService(webapp.RequestHandler, JSONRPC):
+    def post(self):
+        response, code = self.handleRequest(self.request.body, self.HTTP_POST)
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.set_status(code)
+        self.response.out.write(response)
